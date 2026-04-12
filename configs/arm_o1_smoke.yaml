@@ -1,0 +1,39 @@
+run_name: arm_o1_smoke
+seed: 42
+device: auto
+
+dataset:
+  root: datasets/dataset_gcc-7.3.0_arm_32_O1_strip
+  max_train_samples: 256
+  max_valid_samples: 64
+  max_test_samples: 64
+  max_pseudo_nodes: 160
+  max_asm_blocks: 80
+  max_node_tokens: 24
+  max_target_tokens: 28
+
+vocab:
+  src_min_freq: 1
+  tgt_min_freq: 1
+  src_max_size: 20000
+  tgt_max_size: 8000
+
+model:
+  d_model: 192
+  num_heads: 4
+  num_layers: 3
+  dropout: 0.15
+  ff_multiplier: 4
+  max_positions: 512
+
+train:
+  batch_size: 4
+  epochs: 3
+  learning_rate: 0.0005
+  weight_decay: 0.00001
+  grad_clip: 1.0
+  early_stopping_patience: 3
+  teacher_forcing_ratio: 1.0
+
+decode:
+  max_new_tokens: 28

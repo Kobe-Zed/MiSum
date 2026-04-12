@@ -1,0 +1,50 @@
+run_name: x64_o3_full
+seed: 42
+device: auto
+
+dataset:
+  root: datasets/dataset_gcc-7.3.0_x86_64_O3_strip
+  max_train_samples: null
+  max_valid_samples: null
+  max_test_samples: null
+  max_pseudo_nodes: 256
+  max_asm_blocks: 128
+  max_node_tokens: 32
+  max_target_tokens: 32
+
+vocab:
+  src_min_freq: 2
+  tgt_min_freq: 1
+  src_max_size: 40000
+  tgt_max_size: 12000
+
+model:
+  d_model: 256
+  num_heads: 4
+  num_layers: 4
+  dropout: 0.2
+  ff_multiplier: 4
+  max_positions: 768
+
+dataloader:
+  num_workers: 4
+  pin_memory: true
+  persistent_workers: true
+
+train:
+  batch_size: 4
+  eval_batch_size: 4
+  epochs: 10
+  learning_rate: 0.0003
+  weight_decay: 0.00001
+  grad_clip: 1.0
+  early_stopping_patience: 4
+  teacher_forcing_ratio: 1.0
+  gradient_accumulation_steps: 8
+  use_amp: true
+  amp_dtype: float16
+  allow_tf32: true
+  matmul_precision: high
+
+decode:
+  max_new_tokens: 32
